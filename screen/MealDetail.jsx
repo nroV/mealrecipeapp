@@ -11,33 +11,37 @@ import {
 import { MEALS } from "../data/dummy-data";
 import CardList from "../components/CardList";
 import Custombutton from "../components/Custombutton";
-import { favoriteContext } from "../store/context/Favoritecontext";
+
 import { Colors } from "../utils/constants/Color";
+import { useDispatch, useSelector } from "react-redux";
+import { AddFavorite, RemoveFavorite } from "../store/redux/reducer/FavoriteSlice";
 export default function MealDetail({ route, navigation }) {
   const meal = route.params;
 
   const singlemeal = MEALS.find((ele) => ele.id.includes(meal.mealId));
 
-  const { id, add, remove } = useContext(favoriteContext);
 
+  const dispatch = useDispatch()
+  const id = useSelector(store=>store.favoriteReducer.id)
   function onTapMeal(mid) {
-    console.log(mid);
-    console.log(id.includes(mid));
 
-    if (id.includes(mid)) {
-      remove(mid);
+
+    if (id.includes(mid) == true) {
+      // remove(mid);
+      console.log('true')
+      dispatch(RemoveFavorite(mid))
       return;
     }
 
-    add(mid);
+    // add(mid);
+    dispatch(AddFavorite(mid))
   }
   navigation.setOptions({
     title: meal.mealTitle,
     headerRight: () => {
-      console.log(meal.mealId);
+
       const isMealFavorite = id.includes(meal.mealId);
 
-      console.log(isMealFavorite);
       return (
         <Custombutton
           onTap={onTapMeal.bind(null, meal.mealId)}
@@ -46,8 +50,6 @@ export default function MealDetail({ route, navigation }) {
       );
     },
   });
-
-  console.log(id);
   return (
     <ScrollView style={styles.container}>
       <View>

@@ -2,10 +2,15 @@ import React, { useContext } from "react";
 
 import { FlatList, View ,Text} from "react-native";
 import MealCard from "../components/MealCard";
-import { favoriteContext } from "../store/context/Favoritecontext";
+
 import { MEALS } from "../data/dummy-data";
+import { useSelector } from "react-redux";
 export default function FavoriteScreen() {
-  const { id, add, remove } = useContext(favoriteContext);
+  // const { id, add, remove } = useContext(favoriteContext);
+
+ const id = useSelector(store=>store.favoriteReducer.id)
+
+ console.log(id)
   const favorites =   MEALS.filter(meal=>id.includes(meal.id))
 
   console.log(favorites)

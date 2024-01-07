@@ -12,6 +12,9 @@ import FavoriteScreen from "./screen/FavoriteScreen";
 import { Colors } from "./utils/constants/Color";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/centralStore";
+
 export default function App() {
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
@@ -56,7 +59,7 @@ export default function App() {
   };
 
   return (
-    <FavoriteProvider>
+    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -83,7 +86,7 @@ export default function App() {
           <Stack.Screen name="Meal/detail" component={MealDetail} />
         </Stack.Navigator>
       </NavigationContainer>
-    </FavoriteProvider>
+    </Provider>
   );
 }
 
