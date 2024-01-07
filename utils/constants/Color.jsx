@@ -4,5 +4,6 @@ export const Colors = {
    primaryColor:'#525CEB',
    primarySwitch:'#BFCFE7',
    backgroundColor:'#BFCFE7',
-   primaryLight:'#F8EDFF'
+   primaryLight:'#F8EDFF',
+   white:'white'
 }
